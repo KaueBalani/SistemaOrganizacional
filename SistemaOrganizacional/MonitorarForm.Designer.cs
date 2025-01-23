@@ -240,6 +240,7 @@
             Controls.Add(label1);
             Name = "MonitorarForm";
             Text = "MonitorarForm";
+            Load += MonitorarForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

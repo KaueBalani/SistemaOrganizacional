@@ -289,7 +289,12 @@ namespace SistemaOrganizacional
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            
+
+        }
+
+        private void MonitorarForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
