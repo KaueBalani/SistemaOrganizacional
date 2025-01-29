@@ -36,18 +36,18 @@
             buscarTxtBox = new TextBox();
             buscarBtn = new Button();
             info1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            input1 = new TextBox();
+            input7 = new TextBox();
             info7 = new Label();
-            textBox3 = new TextBox();
+            input6 = new TextBox();
             info6 = new Label();
-            textBox4 = new TextBox();
+            input5 = new TextBox();
             info5 = new Label();
-            textBox5 = new TextBox();
+            input4 = new TextBox();
             info4 = new Label();
-            textBox6 = new TextBox();
+            input3 = new TextBox();
             info3 = new Label();
-            textBox7 = new TextBox();
+            input2 = new TextBox();
             info2 = new Label();
             removeBtn = new Button();
             addBtn = new Button();
@@ -129,19 +129,19 @@
             info1.TabIndex = 8;
             info1.Text = "Atributo1:";
             // 
-            // textBox1
+            // input1
             // 
-            textBox1.Location = new Point(92, 113);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(185, 23);
-            textBox1.TabIndex = 9;
+            input1.Location = new Point(202, 111);
+            input1.Name = "input1";
+            input1.Size = new Size(185, 23);
+            input1.TabIndex = 9;
             // 
-            // textBox2
+            // input7
             // 
-            textBox2.Location = new Point(92, 300);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(185, 23);
-            textBox2.TabIndex = 11;
+            input7.Location = new Point(202, 298);
+            input7.Name = "input7";
+            input7.Size = new Size(185, 23);
+            input7.TabIndex = 11;
             // 
             // info7
             // 
@@ -153,12 +153,12 @@
             info7.TabIndex = 10;
             info7.Text = "Atributo1:";
             // 
-            // textBox3
+            // input6
             // 
-            textBox3.Location = new Point(92, 270);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(185, 23);
-            textBox3.TabIndex = 13;
+            input6.Location = new Point(202, 268);
+            input6.Name = "input6";
+            input6.Size = new Size(185, 23);
+            input6.TabIndex = 13;
             // 
             // info6
             // 
@@ -170,12 +170,12 @@
             info6.TabIndex = 12;
             info6.Text = "Atributo1:";
             // 
-            // textBox4
+            // input5
             // 
-            textBox4.Location = new Point(92, 240);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(185, 23);
-            textBox4.TabIndex = 15;
+            input5.Location = new Point(202, 238);
+            input5.Name = "input5";
+            input5.Size = new Size(185, 23);
+            input5.TabIndex = 15;
             // 
             // info5
             // 
@@ -187,12 +187,12 @@
             info5.TabIndex = 14;
             info5.Text = "Atributo1:";
             // 
-            // textBox5
+            // input4
             // 
-            textBox5.Location = new Point(92, 210);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(185, 23);
-            textBox5.TabIndex = 17;
+            input4.Location = new Point(202, 208);
+            input4.Name = "input4";
+            input4.Size = new Size(185, 23);
+            input4.TabIndex = 17;
             // 
             // info4
             // 
@@ -204,12 +204,12 @@
             info4.TabIndex = 16;
             info4.Text = "Atributo1:";
             // 
-            // textBox6
+            // input3
             // 
-            textBox6.Location = new Point(92, 178);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(185, 23);
-            textBox6.TabIndex = 19;
+            input3.Location = new Point(202, 176);
+            input3.Name = "input3";
+            input3.Size = new Size(185, 23);
+            input3.TabIndex = 19;
             // 
             // info3
             // 
@@ -221,12 +221,12 @@
             info3.TabIndex = 18;
             info3.Text = "Atributo1:";
             // 
-            // textBox7
+            // input2
             // 
-            textBox7.Location = new Point(92, 146);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(185, 23);
-            textBox7.TabIndex = 21;
+            input2.Location = new Point(202, 144);
+            input2.Name = "input2";
+            input2.Size = new Size(185, 23);
+            input2.TabIndex = 21;
             // 
             // info2
             // 
@@ -265,6 +265,7 @@
             editListView.Size = new Size(342, 362);
             editListView.TabIndex = 24;
             editListView.UseCompatibleStateImageBehavior = false;
+            editListView.SelectedIndexChanged += editListView_SelectedIndexChanged;
             // 
             // EditarForm
             // 
@@ -274,19 +275,19 @@
             Controls.Add(editListView);
             Controls.Add(addBtn);
             Controls.Add(removeBtn);
-            Controls.Add(textBox7);
+            Controls.Add(input2);
             Controls.Add(info2);
-            Controls.Add(textBox6);
+            Controls.Add(input3);
             Controls.Add(info3);
-            Controls.Add(textBox5);
+            Controls.Add(input4);
             Controls.Add(info4);
-            Controls.Add(textBox4);
+            Controls.Add(input5);
             Controls.Add(info5);
-            Controls.Add(textBox3);
+            Controls.Add(input6);
             Controls.Add(info6);
-            Controls.Add(textBox2);
+            Controls.Add(input7);
             Controls.Add(info7);
-            Controls.Add(textBox1);
+            Controls.Add(input1);
             Controls.Add(info1);
             Controls.Add(buscarBtn);
             Controls.Add(buscarTxtBox);
@@ -312,18 +313,18 @@
         private TextBox buscarTxtBox;
         private Button buscarBtn;
         private Label info1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox input1;
+        private TextBox input7;
         private Label info7;
-        private TextBox textBox3;
+        private TextBox input6;
         private Label info6;
-        private TextBox textBox4;
+        private TextBox input5;
         private Label info5;
-        private TextBox textBox5;
+        private TextBox input4;
         private Label info4;
-        private TextBox textBox6;
+        private TextBox input3;
         private Label info3;
-        private TextBox textBox7;
+        private TextBox input2;
         private Label info2;
         private Button removeBtn;
         private Button addBtn;
