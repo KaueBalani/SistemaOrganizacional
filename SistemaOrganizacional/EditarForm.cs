@@ -41,6 +41,7 @@ namespace SistemaOrganizacional
             itemComboBox.Items.Add("Recurso");
             itemComboBox.Items.Add("Custo");
             itemComboBox.Items.Add("Progresso");
+            itemComboBox.Items.Add("Custo_Equipe");
 
             info1.Text = "Indisponível";
             info2.Text = "Indisponível";
@@ -390,6 +391,48 @@ namespace SistemaOrganizacional
                 }
                 conexao.Close();
             }
+            else if (itemComboBox.Text == "Custo_Equipe")
+            {
+                editListView.Columns.Clear();
+                editListView.Columns.Add("ID_equipe");
+                editListView.Columns.Add("ID_custo");
+                editListView.Columns.Add("Descricao");
+                editListView.Columns.Add("ID_projeto");
+
+                info1.Text = "ID_equipe:";
+                info2.Text = "ID_custo:";
+                info3.Text = "Descrição:";
+
+                input1.Enabled = true;
+                input2.Enabled = true;
+                input3.Enabled = true;
+
+                info4.Text = "Indisponível";
+                info5.Text = "Indisponível";
+                info6.Text = "Indisponível";
+                info7.Text = "Indisponível";
+                input4.Enabled = false;
+                input5.Enabled = false;
+                input6.Enabled = false;
+                input7.Enabled = false;
+
+                editListView.Items.Clear();
+                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text);
+
+                while (reader.Read())
+                {
+                    string[] linha =
+                    {
+                        reader.GetInt32(0).ToString(),
+                        reader.GetInt32(1).ToString(),
+                        reader.GetString(2),
+                        reader.GetInt32(3).ToString(),
+                    };
+                    ListViewItem item = new ListViewItem(linha);
+                    editListView.Items.Add(item);
+                }
+                conexao.Close();
+            }
         }
         private void conectar(string command)
         {
@@ -562,6 +605,25 @@ namespace SistemaOrganizacional
                 }
                 conexao.Close();
             }
+            else if (itemComboBox.Text == "Custo_Equipe")
+            {
+                editListView.Items.Clear();
+                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text);
+
+                while (reader.Read())
+                {
+                    string[] linha =
+                    {
+                        reader.GetInt32(0).ToString(),
+                        reader.GetInt32(1).ToString(),
+                        reader.GetString(2),
+                        reader.GetInt32(3).ToString(),
+                    };
+                    ListViewItem item = new ListViewItem(linha);
+                    editListView.Items.Add(item);
+                }
+                conexao.Close();
+            }
         }
 
         private void buscarBtn_Click(object sender, EventArgs e)
@@ -715,6 +777,24 @@ namespace SistemaOrganizacional
                 }
                 conexao.Close();
             }
+            else if (itemComboBox.Text == "Custo_Equipe")
+            {
+                editListView.Items.Clear();
+                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text + " and id_custo like '%" + buscarTxtBox.Text + "%' or id_equipe like '%" + buscarTxtBox.Text + "%'");
+                while (reader.Read())
+                {
+                    string[] linha =
+                    {
+                        reader.GetInt32(0).ToString(),
+                        reader.GetInt32(1).ToString(),
+                        reader.GetString(2),
+                        reader.GetInt32(3).ToString(),
+                    };
+                    ListViewItem item = new ListViewItem(linha);
+                    editListView.Items.Add(item);
+                }
+                conexao.Close();
+            }
         }
 
         private void removeBtn_Click(object sender, EventArgs e)
@@ -724,6 +804,10 @@ namespace SistemaOrganizacional
                 var item = editListView.SelectedItems[0];
                 if (itemComboBox.Text == "Membro")
                     conectar("Delete from " + itemComboBox.Text + " where CPF = " + item.SubItems[0].Text);
+                else if (itemComboBox.Text == "Custo_Equipe")
+                {
+                    conectar("Delete from " + itemComboBox.Text + " where id_equipe = " + item.SubItems[0].Text + " and id_custo = " + item.SubItems[1].Text);
+                }
                 else
                     conectar("Delete from " + itemComboBox.Text + " where id_" + itemComboBox.Text + " = " + item.SubItems[0].Text);
                 conexao.Close();
@@ -766,7 +850,7 @@ namespace SistemaOrganizacional
                 int i = 0;
                 int j = 0;
                 var co = editListView.Columns;
-                for(i=0; i<co.Count; i++)
+                for (i = 0; i < co.Count; i++)
                 {
                     if (array[j].Enabled)
                     {
@@ -788,7 +872,7 @@ namespace SistemaOrganizacional
                 conectar("insert into " + itemComboBox.Text + "(" + v + ") "
                     + "values(" + v2 + projComboBox.Text + ")");
                 conexao.Close();
-                
+
                 atualizar();
             }
         }
@@ -800,7 +884,7 @@ namespace SistemaOrganizacional
 
         private void editListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

@@ -162,7 +162,7 @@ namespace SistemaOrganizacional
                     string[] linha =
                     {
                         reader.GetInt32(0).ToString(),
-                        reader.GetString(1),
+                        reader.GetDateTime(1).ToString(),
                         reader.GetString(2),
                         reader.GetString(3),
                         reader.GetString(4),
