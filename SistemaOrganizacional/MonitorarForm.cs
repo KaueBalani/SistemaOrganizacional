@@ -38,26 +38,6 @@ namespace SistemaOrganizacional
             }
             conexao.Close();
 
-            /*
-            while (reader.Read())
-            {
-                string[] linha =
-                {
-                    reader.GetInt32(0).ToString(),
-                    reader.GetDateTime(1).ToString(),
-                    reader.GetString(2),
-                    reader.GetString(3),
-                    reader.GetString(4),
-                    reader.GetString(5),
-                    reader.GetDateTime(6).ToString(),
-                    reader.GetFloat(7).ToString()
-                };
-                ListViewItem item = new ListViewItem(linha);
-                item.Text = linha[4];
-                monitProjetoBox.Items.Add(item);
-            }
-            conexao.Close();*/
-
             monitListView.Columns.Add("ID");
             monitListView.Columns.Add("Prazo");
             monitListView.Columns.Add("Titulo");
@@ -175,7 +155,7 @@ namespace SistemaOrganizacional
                 conexao.Close();
 
                 listView1.Items.Clear();
-                conectar("select * from subtarefa where id_projeto = " + monitProjetoBox.Text);
+                conectar("select subtarefa.*, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefa.id_projeto = " + monitProjetoBox.Text);
                 while (reader.Read())
                 {
                     string[] linha =
@@ -211,7 +191,7 @@ namespace SistemaOrganizacional
                 conexao.Close();
 
                 listView3.Items.Clear();
-                conectar("select * from membro where id_projeto = " + monitProjetoBox.Text);
+                conectar("select membro.*, equipe.id_equipe, equipe.id_projeto from membro, equipe where membro.id_equipe = equipe.id_equipe and equipe.id_projeto = " + monitProjetoBox.Text);
                 while (reader.Read())
                 {
                     string[] linha =
@@ -264,7 +244,7 @@ namespace SistemaOrganizacional
                 conexao.Close();
 
                 listView6.Items.Clear();
-                conectar("select * from recurso where id_projeto = " + monitProjetoBox.Text);
+                conectar("select * from progresso where id_projeto = " + monitProjetoBox.Text);
                 while (reader.Read())
                 {
                     string[] linha =

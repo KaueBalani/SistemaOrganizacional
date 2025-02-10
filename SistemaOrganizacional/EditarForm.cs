@@ -143,7 +143,7 @@ namespace SistemaOrganizacional
                 input7.Enabled = false;
 
                 editListView.Items.Clear();
-                conectar("select * from membro where id_projeto = " + projComboBox.Text);
+                conectar("select membro.*, equipe.id_equipe, equipe.id_projeto from membro, equipe where membro.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -237,7 +237,7 @@ namespace SistemaOrganizacional
                 input7.Enabled = false;
 
                 editListView.Items.Clear();
-                conectar("select * from subtarefa where id_projeto = " + projComboBox.Text);
+                conectar("select subtarefa.*, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefas.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -396,28 +396,28 @@ namespace SistemaOrganizacional
                 editListView.Columns.Clear();
                 editListView.Columns.Add("ID_equipe");
                 editListView.Columns.Add("ID_custo");
-                editListView.Columns.Add("Descricao");
-                editListView.Columns.Add("ID_projeto");
 
                 info1.Text = "ID_equipe:";
                 info2.Text = "ID_custo:";
-                info3.Text = "Descrição:";
+                
 
                 input1.Enabled = true;
                 input2.Enabled = true;
                 input3.Enabled = true;
 
+                info3.Text = "Indisponível";
                 info4.Text = "Indisponível";
                 info5.Text = "Indisponível";
                 info6.Text = "Indisponível";
                 info7.Text = "Indisponível";
+                input3.Enabled = false;
                 input4.Enabled = false;
                 input5.Enabled = false;
                 input6.Enabled = false;
                 input7.Enabled = false;
 
                 editListView.Items.Clear();
-                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text);
+                conectar("select custo_equipe.*, equipe.id_equipe, equipe.id_projeto from custo_equipe, equipe where custo_equipe.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -425,8 +425,6 @@ namespace SistemaOrganizacional
                     {
                         reader.GetInt32(0).ToString(),
                         reader.GetInt32(1).ToString(),
-                        reader.GetString(2),
-                        reader.GetInt32(3).ToString(),
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -484,7 +482,7 @@ namespace SistemaOrganizacional
             {
 
                 editListView.Items.Clear();
-                conectar("select * from membro where id_projeto = " + projComboBox.Text);
+                conectar("select membro.*, equipe.id_equipe, equipe.id_projeto from membro, equipe where membro.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -527,7 +525,7 @@ namespace SistemaOrganizacional
             {
 
                 editListView.Items.Clear();
-                conectar("select * from subtarefa where id_projeto = " + projComboBox.Text);
+                conectar("select subtarefa.*, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefas.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -608,7 +606,7 @@ namespace SistemaOrganizacional
             else if (itemComboBox.Text == "Custo_Equipe")
             {
                 editListView.Items.Clear();
-                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text);
+                conectar("select custo_equipe.*, equipe.id_equipe, equipe.id_projeto from custo_equipe, equipe where custo_equipe.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text);
 
                 while (reader.Read())
                 {
@@ -616,8 +614,6 @@ namespace SistemaOrganizacional
                     {
                         reader.GetInt32(0).ToString(),
                         reader.GetInt32(1).ToString(),
-                        reader.GetString(2),
-                        reader.GetInt32(3).ToString(),
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -656,7 +652,7 @@ namespace SistemaOrganizacional
             {
 
                 editListView.Items.Clear();
-                conectar("select * from membro where id_projeto = " + projComboBox.Text + " and cpf like '%" + buscarTxtBox.Text + "%'");
+                conectar("select membro.*, equipe.id_equipe, equipe.id_projeto from membro, equipe where membro.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text + " and membro.cpf like '%" + buscarTxtBox.Text + "%'");
 
                 while (reader.Read())
                 {
@@ -699,7 +695,7 @@ namespace SistemaOrganizacional
             {
 
                 editListView.Items.Clear();
-                conectar("select * from subtarefa where id_projeto = " + projComboBox.Text + " and id_subtarefa like '%" + buscarTxtBox.Text + "%'");
+                conectar("select subtarefa.*, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefas.id_projeto = " + projComboBox.Text + " and subtarefa.id_subtarefa like '%" + buscarTxtBox.Text + "%'");
 
                 while (reader.Read())
                 {
@@ -780,15 +776,13 @@ namespace SistemaOrganizacional
             else if (itemComboBox.Text == "Custo_Equipe")
             {
                 editListView.Items.Clear();
-                conectar("select * from custo_equipe where id_projeto = " + projComboBox.Text + " and id_custo like '%" + buscarTxtBox.Text + "%' or id_equipe like '%" + buscarTxtBox.Text + "%'");
+                conectar("select custo_equipe.*, equipe.id_equipe, equipe.id_projeto from custo_equipe, equipe where custo_equipe.id_equipe = equipe.id_equipe and equipe.id_projeto = " + projComboBox.Text + " and custo_equipe.id_custo like '%" + buscarTxtBox.Text + "%' or custo_equipe.id_equipe like '%" + buscarTxtBox.Text + "%'");
                 while (reader.Read())
                 {
                     string[] linha =
                     {
                         reader.GetInt32(0).ToString(),
                         reader.GetInt32(1).ToString(),
-                        reader.GetString(2),
-                        reader.GetInt32(3).ToString(),
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -869,8 +863,21 @@ namespace SistemaOrganizacional
 
                 v = v.Remove(v.Length - 2);
 
-                conectar("insert into " + itemComboBox.Text + "(" + v + ") "
-                    + "values(" + v2 + projComboBox.Text + ")");
+                if (itemComboBox.Text == "Membro")
+                {
+                    conectar("insert into Membro(cpf, cargo, nome, id_equipe) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                }
+                else if (itemComboBox.Text == "Subtarefa")
+                {
+                    conectar("insert into subtarefa(id_subtarefa, prazo, status, titulo, id_tarefas) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                }
+                else if (itemComboBox.Text == "Custo_Equipe")
+                {
+                    conectar("insert into cuasto_equipe(id_equipe, id_custo) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                }
+                else
+                    conectar("insert into " + itemComboBox.Text + "(" + v + ") "
+                        + "values(" + v2 + projComboBox.Text + ")");
                 conexao.Close();
 
                 atualizar();
