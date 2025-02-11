@@ -103,13 +103,14 @@ values (1, 100.00, 0.00, 0.00, 1);
 insert into equipe(ID_Equipe, nome, qte_membros, tempo, preco_temp, ID_Progresso, ID_Projeto)
 values(1, 'trupe 8 e 7', 3, 15.5, 29.99, 1, 1);
 
-insert into membro(cpf, cargo, nome, id_equipe, id_projeto)
-values('12345678900', 'Presidente', 'Jerson', 1, 1);
+insert into membro(cpf, cargo, nome, id_equipe)
+values('12345678900', 'Presidente', 'Jerson', 1);
 
 insert into tarefas (ID_tarefas, Prazo, titulo, status, cpf, ID_Progresso, ID_Projeto)
 values(1, '1953-01-01', 'Fabricar x', 'Incompleto', '12345678900', 1, 1);
 
-insert into subtarefa (ID_subtarefa, prazo, status, titulo, ID_tarefas, ID_Projeto)
-values(1, '1954-03-02', 'incompleto', 'fabricar', 1, 1);
+insert into subtarefa (ID_subtarefa, prazo, status, titulo, ID_tarefas)
+values(1, '1954-03-02', 'incompleto', 'fabricar', 1);
 
+select * from membro;
 select * from custo

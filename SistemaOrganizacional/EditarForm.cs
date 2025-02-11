@@ -216,7 +216,6 @@ namespace SistemaOrganizacional
                 editListView.Columns.Add("Prazo");
                 editListView.Columns.Add("Status");
                 editListView.Columns.Add("ID_tarefas");
-                editListView.Columns.Add("ID_projeto");
 
                 info1.Text = "ID:";
                 info2.Text = "Titulo:";
@@ -247,8 +246,7 @@ namespace SistemaOrganizacional
                         reader.GetString(3),
                         reader.GetDateTime(1).ToString(),
                         reader.GetString(2),
-                        reader.GetInt32(4).ToString(),
-                        reader.GetInt32(5).ToString()
+                        reader.GetInt32(4).ToString()
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -259,7 +257,7 @@ namespace SistemaOrganizacional
             {
                 editListView.Columns.Clear();
                 editListView.Columns.Add("ID_recurso");
-                editListView.Columns.Add("Qte_utilizada");
+                editListView.Columns.Add("Qte_util");
                 editListView.Columns.Add("Qte_disp");
                 editListView.Columns.Add("Preco_unit");
                 editListView.Columns.Add("Tipo");
@@ -498,7 +496,7 @@ namespace SistemaOrganizacional
                 }
                 conexao.Close();
             }
-            else if (itemComboBox.Text == "Tarefa")
+            else if (itemComboBox.Text == "Tarefas")
             {
 
                 editListView.Items.Clear();
@@ -536,7 +534,6 @@ namespace SistemaOrganizacional
                         reader.GetDateTime(1).ToString(),
                         reader.GetString(2),
                         reader.GetInt32(4).ToString(),
-                        reader.GetInt32(5).ToString(),
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -567,7 +564,8 @@ namespace SistemaOrganizacional
             }
             else if (itemComboBox.Text == "Custo")
             {
-                conectar("select * from recurso where id_projeto = " + projComboBox.Text);
+                editListView.Items.Clear();
+                conectar("select * from custo where id_projeto = " + projComboBox.Text);
                 while (reader.Read())
                 {
                     string[] linha =
@@ -668,7 +666,7 @@ namespace SistemaOrganizacional
                 }
                 conexao.Close();
             }
-            else if (itemComboBox.Text == "Tarefa")
+            else if (itemComboBox.Text == "Tarefas")
             {
 
                 editListView.Items.Clear();
@@ -705,8 +703,7 @@ namespace SistemaOrganizacional
                         reader.GetString(3),
                         reader.GetDateTime(1).ToString(),
                         reader.GetString(2),
-                        reader.GetInt32(4).ToString(),
-                        reader.GetInt32(5).ToString(),
+                        reader.GetInt32(4).ToString()
                     };
                     ListViewItem item = new ListViewItem(linha);
                     editListView.Items.Add(item);
@@ -737,7 +734,8 @@ namespace SistemaOrganizacional
             }
             else if (itemComboBox.Text == "Custo")
             {
-                conectar("select * from recurso where id_projeto = " + projComboBox.Text + " and id_custo like '%" + buscarTxtBox.Text + "%'");
+                editListView.Items.Clear();
+                conectar("select * from custo where id_projeto = " + projComboBox.Text + " and id_custo like '%" + buscarTxtBox.Text + "%'");
                 while (reader.Read())
                 {
                     string[] linha =
@@ -865,15 +863,15 @@ namespace SistemaOrganizacional
 
                 if (itemComboBox.Text == "Membro")
                 {
-                    conectar("insert into Membro(cpf, cargo, nome, id_equipe) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                    conectar("insert into Membro(cpf, nome, cargo, id_equipe) " + "values (" + v2.Remove(v2.Length - 2) + ")");
                 }
                 else if (itemComboBox.Text == "Subtarefa")
                 {
-                    conectar("insert into subtarefa(id_subtarefa, prazo, status, titulo, id_tarefas) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                    conectar("insert into subtarefa(id_subtarefa, titulo, prazo, status, id_tarefas) " + "values (" + v2.Remove(v2.Length - 2) + ")");
                 }
                 else if (itemComboBox.Text == "Custo_Equipe")
                 {
-                    conectar("insert into cuasto_equipe(id_equipe, id_custo) " + "values (" + v2.Remove(v2.Length - 2) + ")");
+                    conectar("insert into custo_equipe(id_equipe, id_custo) " + "values (" + v2.Remove(v2.Length - 2) + ")");
                 }
                 else
                     conectar("insert into " + itemComboBox.Text + "(" + v + ") "
@@ -886,6 +884,13 @@ namespace SistemaOrganizacional
 
         private void itemComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            input1.Text = "";
+            input2.Text = "";
+            input3.Text = "";
+            input4.Text = "";
+            input5.Text = "";
+            input6.Text = "";
+            input7.Text = "";
             escolher_tipo();
         }
 

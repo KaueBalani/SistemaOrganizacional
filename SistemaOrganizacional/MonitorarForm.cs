@@ -155,7 +155,7 @@ namespace SistemaOrganizacional
                 conexao.Close();
 
                 listView1.Items.Clear();
-                conectar("select subtarefa.*, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefa.id_projeto = " + monitProjetoBox.Text);
+                conectar("select subtarefa.*, tarefas.id_tarefas, tarefas.id_projeto from subtarefa, tarefas where subtarefa.id_tarefas = tarefas.id_tarefas and tarefas.id_projeto = " + monitProjetoBox.Text);
                 while (reader.Read())
                 {
                     string[] linha =
